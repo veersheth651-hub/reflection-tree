@@ -1,1 +1,53 @@
+{
+  "start": "START",
+  "nodes": [
 
+    { "id": "START", "type": "start", "text": "Welcome. Let’s reflect on your recent work experience.", "next": "Q1" },
+
+    {
+      "id": "Q1",
+      "type": "question",
+      "text": "How did your last work session feel?",
+      "options": [
+        {"label": "Productive", "signal": "axis1:internal", "next": "Q2"},
+        {"label": "Mixed", "signal": "axis1:internal", "next": "Q2"},
+        {"label": "Tough", "signal": "axis1:external", "next": "Q2"},
+        {"label": "Frustrating", "signal": "axis1:external", "next": "Q2"}
+      ]
+    },
+
+    {
+      "id": "Q2",
+      "type": "question",
+      "text": "What best explains that feeling?",
+      "options": [
+        {"label": "My effort/actions", "signal": "axis1:internal", "next": "Q3"},
+        {"label": "Both me and situation", "signal": "axis1:internal", "next": "Q3"},
+        {"label": "External issues", "signal": "axis1:external", "next": "Q3"},
+        {"label": "Out of my control", "signal": "axis1:external", "next": "Q3"}
+      ]
+    },
+
+    {
+      "id": "Q3",
+      "type": "question",
+      "text": "When something goes wrong, what do you usually do?",
+      "options": [
+        {"label": "Adjust my approach", "signal": "axis1:internal", "next": "D1"},
+        {"label": "Ask for help", "signal": "axis1:internal", "next": "D1"},
+        {"label": "Wait for change", "signal": "axis1:external", "next": "D1"},
+        {"label": "Blame situation", "signal": "axis1:external", "next": "D1"}
+      ]
+    },
+
+    {
+      "id": "D1",
+      "type": "decision",
+      "conditions": [
+        {"if": "axis1.dominant=internal", "next": "R1_HIGH"},
+        {"if": "axis1.dominant=external", "next": "R1_LOW"}
+      ]
+    },
+
+    {
+      "id": "R1_HIGH
